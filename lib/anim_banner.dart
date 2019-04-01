@@ -25,7 +25,6 @@ class _AnimatedBannerStackState extends State<AnimatedBannerStack>
     with SingleTickerProviderStateMixin {
 
   _AnimatedBannerStackState(this.list);
-
   AnimationController _animationController;
   Animation animation, transformationAnim;
 

@@ -10,8 +10,6 @@ import 'package:loginfirebaseexample/system/moviedb_controller.dart';
 import 'package:async/async.dart';
 
 
-
-
 class HomePage extends StatefulWidget {
   HomePage({this.onSignedOut});
   final VoidCallback onSignedOut;
@@ -61,11 +59,7 @@ class _HomePage extends State<HomePage> {
   void searchDebug(){
     MovieDBController().searchMovie("robin");
   }
-
-
   Future<List<DbMovieObj>> fetchList() async {
-
-
 
     var vidlist = await MovieDBController()
         .discoverRequest(SortBy.popularity, SortTypes.asc);
@@ -75,7 +69,6 @@ class _HomePage extends State<HomePage> {
 
     //var cacheManager = await CacheManager.getInstance();
     //netImg = await cacheManager.getFile(vidlist[0].getPoster());
-
     //return vidlist;
 
     return _memoizer.runOnce(() async {
@@ -149,9 +142,6 @@ class _HomePage extends State<HomePage> {
   }
 
   */
-
-
-
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
@@ -189,9 +179,6 @@ class _HomePage extends State<HomePage> {
                             expandedHeight: 650.0,
                             pinned: false,
                             primary: false,
-
-
-
                             flexibleSpace: FlexibleSpaceBar(
                               collapseMode: CollapseMode.parallax,
                               background: AnimatedBannerStack(snapshot.data),
@@ -199,8 +186,6 @@ class _HomePage extends State<HomePage> {
 
                         );
                       }
-
-
                     else {
                       return SliverAppBar(
                         primary: false,
@@ -216,23 +201,13 @@ class _HomePage extends State<HomePage> {
 
                   },
                 ),
-
-
                 sliverSearchBar(),
                 SliverList(
                     delegate: SliverChildListDelegate(
                       [
-
-
                         CategoryBarBuilder(category: 'Action', expand: false),
                         CategoryBarBuilder(category: 'Drama', expand: false),
                         CategoryBarBuilder(category: 'thriller', expand: false),
-
-
-
-
-
-
                       ]
                     ),
                 ),
@@ -246,10 +221,6 @@ class _HomePage extends State<HomePage> {
         ),
       ),
     );
-
-
-
-
 
   }
 
