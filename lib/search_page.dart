@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:loginfirebaseexample/system/DataWidget.dart';
 import 'package:loginfirebaseexample/system/moviedb_controller.dart';
 
 class SearchPage extends StatefulWidget{
-
-
   @override
   State<StatefulWidget> createState() {
     return _SearchPage();
@@ -23,7 +20,6 @@ class _SearchPage extends State<SearchPage>{
       } else {
         setState(() {
           _searchText = _filter.text;
-
         });
       }
     });
@@ -34,21 +30,14 @@ class _SearchPage extends State<SearchPage>{
   List names = new List(); // names we get from API
   //List<List<DbMovieObj>> filteredList = new List<List<DbMovieObj>>();
   List<DbMovieObj> filteredList = new List<DbMovieObj>(); // names filtered by search text
-  Icon _searchIcon = new Icon(Icons.search);
-  Widget _appBarTitle = new Text( 'Search Example' );
 
   //double dynamicHeight = 500;
-
   /// adds the search keyword from the user into the api request to get a corresponding list of video objects with their data
   Future<List<DbMovieObj>> getSearch(String query) async{
-
     print("seaching1");
     var vidList;
     vidList = await MovieDBController().searchMovie(query);
-
     print("seaching2");
-
-
     return vidList;
   }
 
@@ -65,30 +54,13 @@ class _SearchPage extends State<SearchPage>{
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                /*
-                FlatButton(
-                  onPressed: (){
-                    setState(() {
-                      DataWidget.of(context).InvertPressed();
-                    });
-                    print(DataWidget.of(context).pressedSearch.toString());
-                  },
-                  child: Container(
-                    width: 50,
-                    height: 50,
-                    child: Icon(Icons.arrow_back,color: Colors.white) ,
-                  ),
-                ),
-                */
                 Expanded (
                   child: Container(
                     padding: EdgeInsets.only(left: 50,right: 50),
                     child: TextField(
                       controller: _filter,
                       decoration: new InputDecoration(
-                          //prefixIcon: new Icon(Icons.search),
-                          hintText: 'Search...',
-                        //counterStyle: TextStyle(color: Colors.white),
+                        hintText: 'Search...',
                         hintStyle: TextStyle(color: Colors.white),
                         prefixStyle: TextStyle(color: Colors.white),
                         fillColor: Colors.white,
@@ -105,9 +77,9 @@ class _SearchPage extends State<SearchPage>{
               //height: 5000,
               //color: Colors.grey,
               child:  FutureBuilder(
-                  future:  getSearch(_searchText), // build listview from here based on letters in searchfield (send them to a new db search future that returns api data)
-                  builder: (context, snapshot) {
-
+                // build listview from here based on letters in searchfield (send them to a new db search future that returns api data)
+                future:  getSearch(_searchText), 
+                builder: (context, snapshot) {
                     if (snapshot.data != null){
                         List<DbMovieObj> tempList = new List<DbMovieObj>();
                         for (int i = 0; i < snapshot.data.length; i++) {
@@ -118,7 +90,7 @@ class _SearchPage extends State<SearchPage>{
                         }
                         filteredList = tempList;
 
-                      return Container(
+                        return Container(
                         padding: EdgeInsets.all(10),
                         //child: new Text("" + snapshot.data[0].originaltitle),
                         child: ListView.builder(
@@ -143,8 +115,6 @@ class _SearchPage extends State<SearchPage>{
                                     Text(filteredList[index].originaltitle,style: TextStyle(color: Colors.white ,fontSize: 18)),
                                   ],
                                 ),
-
-                                //
                               );
                             },
                         ),
@@ -160,11 +130,8 @@ class _SearchPage extends State<SearchPage>{
                   }),
             ),
           ),
-
         ],
       ),
     );
-
-
   }
 }

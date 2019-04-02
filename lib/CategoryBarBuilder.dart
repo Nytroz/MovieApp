@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 
-
 class CategoryBarBuilder extends StatefulWidget {
 
   CategoryBarBuilder({this.expand = false, this.category,this.child});
 
   final String category;
-
   final Widget child;
   final bool expand;
-
 
   @override
   _CategoryBarBuilder createState() => _CategoryBarBuilder(category);
@@ -20,10 +17,8 @@ class _CategoryBarBuilder extends State<CategoryBarBuilder> with SingleTickerPro
 
   _CategoryBarBuilder(this.category);
   final String category;
-
   var expanded;
   Icon clickableIcon;
-
   AnimationController expandController;
   Animation<double> animation;
 
@@ -33,13 +28,11 @@ class _CategoryBarBuilder extends State<CategoryBarBuilder> with SingleTickerPro
     clickableIcon = Icon(Icons.keyboard_arrow_down);
   }
 
-
-
-  ///Setting up the animation
+  //defines open and closing animation
   void prepareAnimations() {
     expandController = AnimationController(
-        vsync: this,
-        duration: Duration(milliseconds: 500)
+      vsync: this,
+      duration: Duration(milliseconds: 500)
     );
     Animation curve = CurvedAnimation(
       parent: expandController,
@@ -48,48 +41,36 @@ class _CategoryBarBuilder extends State<CategoryBarBuilder> with SingleTickerPro
     animation = Tween(begin: 0.0, end: 1.0).animate(curve)
       ..addListener(() {
         setState(() {
-
+          // TODO: no clue but this needs to do something 
         });
       }
-      );
+    );
   }
 
   @override
   void didUpdateWidget(CategoryBarBuilder oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if(widget.expand) {
+    if(widget.expand){
       expandController.forward();
     }
-    else {
+    else{
       expandController.reverse();
     }
   }
 
   @override
-  void dispose() {
-    expandController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-
     return Container(
       child: Column(
-        //mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Container(
             height: 50,
             color: Colors.white,
             child: Row(
-              //crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Container(
-                  //width: 50,
                   constraints: BoxConstraints.tight(Size(50, 50)),
-
                   child: FlatButton(
-
                     onPressed: (){
                       if(expanded == false) {
                         setState(() {
@@ -108,9 +89,9 @@ class _CategoryBarBuilder extends State<CategoryBarBuilder> with SingleTickerPro
                     child: clickableIcon,
                   ),
                 ),
-                 Container(
-                    child: Text("Category: " + category,style: TextStyle(color: Colors.black,fontSize: 20))
-                 ),
+                Container(
+                  child: Text("Category: " + category,style: TextStyle(color: Colors.black,fontSize: 20))
+                ),
               ],
             ),
           ),
@@ -120,6 +101,7 @@ class _CategoryBarBuilder extends State<CategoryBarBuilder> with SingleTickerPro
             child: Container(
               height: 300,
               color: Colors.white,
+              // TODO: Horizontal column that defines found movies in this category 
             ),
           ),
         ],
@@ -127,4 +109,9 @@ class _CategoryBarBuilder extends State<CategoryBarBuilder> with SingleTickerPro
     );
   }
 
+  @override
+  void dispose() {
+    expandController.dispose();
+    super.dispose();
+  }
 }

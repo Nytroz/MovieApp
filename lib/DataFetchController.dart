@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:loginfirebaseexample/movie_page.dart';
 import 'dart:async';
-//import 'load_event.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class MovieRow extends StatelessWidget {
-  //final _isLoading = true;
 
   @override
   Widget build(BuildContext context) {
     return new FutureBuilder(
         future: _fetchFutureData(),
-        //initialData: new <List<VideoObj>>,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
             //if list of movies returned from server request
@@ -32,11 +29,9 @@ class MovieRow extends StatelessWidget {
                       //color: Colors.greenAccent,
                       child: Column(
                         children: <Widget>[
-                           Hero(
-                            tag: 'MoviePanel ${snapshot.data[index].index}',
-                           child: Container(
-                            //padding: EdgeInsets.fromLTRB(0, 150, 0, 0),
-                            //margin: EdgeInsets.fromLTRB(0, 15, 0, 0),
+                          Hero(
+                          tag: 'MoviePanel ${snapshot.data[index].index}',
+                          child: Container(
                             child:  Material(
                                 type: MaterialType.transparency,
                                 child: InkWell(
@@ -44,14 +39,11 @@ class MovieRow extends StatelessWidget {
                                   onTap: (){
                                     //print("${snapshot.data[index].index}");
                                     //var mov = snapshot.data[index];
-
                                     //Navigator.of(context).pop();
                                     //Navigator.popUntil(context);
                                     Navigator.of(context).pushNamedAndRemoveUntil('/HomePage', (Route<dynamic> route) => false);
                                     Navigator.push(context, MaterialPageRoute(builder: (context) => MovieDetailPage(movieObj: snapshot.data[index],index: snapshot.data[index].index)));
-
                                   },
-                                
                               ),
                             ),
                             height: 230,
@@ -63,7 +55,6 @@ class MovieRow extends StatelessWidget {
                                 fit: BoxFit.cover,
                               ),
                             ),
-                            
                           ),
                            ),
                           
